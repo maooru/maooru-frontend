@@ -1,94 +1,332 @@
+
 <!DOCTYPE html>
 <html lang="te">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Telangana News Today | MaaOoru -- All 33 Districts Live</title>
-
+<meta name="description" content="Top news from all 33 Telangana districts in one place. AI-verified citizen news and live updates. Updated live."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-body{font-family:Arial;background:#0D0D1A;color:white;margin:0;padding:20px;}
-h1{color:#E94560;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;}
-.card{background:#1C1C2E;padding:15px;border-radius:10px;}
+:root{
+  --bg:#0D0D1A;--surface:#141425;--card:#1C1C2E;--card2:#20203A;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.04);
+  --red:#E94560;--blue:#0F3460;--gold:#F5C842;--green:#27AE60;
+  --saffron:#FF7722;--teal:#00B4D8;--purple:#6C63FF;--wa:#25D366;
+  --orange:#F97316;--pink:#EC4899;
+  --text:#E2E8F0;--sub:#94A3B8;--white:#fff;
+  --font:'Space Grotesk',sans-serif;
+  --telugu:'Noto Sans Telugu',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(13,13,26,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo{width:34px;height:34px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--telugu);font-weight:700;font-size:17px;color:white;}
+.nav-name{font-size:19px;font-weight:800;color:white;letter-spacing:-0.3px;}
+.nav-sub{font-size:11px;color:var(--sub);display:block;line-height:1;}
+.nav-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.nav-tab{padding:6px 14px;font-size:12px;font-weight:600;color:var(--sub);text-decoration:none;transition:all 0.2s;background:transparent;border:none;cursor:pointer;font-family:var(--font);}
+.nav-tab.active{background:var(--red);color:white;}
+.nav-tab:hover:not(.active){background:rgba(255,255,255,0.05);color:var(--text);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-wa{display:flex;align-items:center;gap:6px;background:var(--wa);color:white;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;transition:opacity 0.2s;}
+.nav-wa:hover{opacity:0.85;}
+.hero-strip{margin-top:60px;background:linear-gradient(135deg,var(--blue) 0%,var(--bg) 100%);padding:32px 32px 24px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hs-label{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.hs-title{font-size:clamp(22px,4vw,36px);font-weight:800;color:white;letter-spacing:-0.5px;margin-bottom:6px;}
+.hs-telugu{font-family:var(--telugu);font-size:16px;color:var(--saffron);margin-bottom:12px;}
+.hs-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.live-pill{display:flex;align-items:center;gap:6px;background:rgba(39,174,96,0.15);border:1px solid rgba(39,174,96,0.3);padding:4px 12px;border-radius:100px;font-size:11px;font-weight:700;color:var(--green);}
+.live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+.hs-stat{font-size:12px;color:var(--sub);}
+.last-upd{font-size:11px;color:var(--sub);font-family:var(--mono);}
+.ticker-bar{background:rgba(233,69,96,0.06);border-bottom:1px solid rgba(233,69,96,0.12);padding:8px 0;overflow:hidden;}
+.ticker-inner{display:inline-flex;animation:tick 35s linear infinite;white-space:nowrap;}
+.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 24px;font-size:12px;font-weight:600;border-right:1px solid var(--border);}
+.tick-dist{color:var(--sub);font-size:10px;}
+.tick-head{color:var(--text);}
+.tick-badge{font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;}
+.tb-verified{background:rgba(39,174,96,0.15);color:var(--green);}
+.tb-ai{background:rgba(249,115,22,0.15);color:var(--orange);}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.filter-bar{padding:16px 32px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:60px;z-index:100;}
+.filter-chips{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
+.chip{padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--sub);transition:all 0.2s;}
+.chip.active{background:var(--red);border-color:var(--red);color:white;}
+.sort-select{background:var(--card);border:1px solid var(--border);color:var(--text);padding:5px 10px;border-radius:8px;font-size:11px;cursor:pointer;}
+.main{max-width:1280px;margin:0 auto;padding:24px 24px 60px;display:grid;grid-template-columns:1fr 320px;gap:24px;}
+@media(max-width:900px){.main{grid-template-columns:1fr;}.sidebar{display:none;}}
+.featured-story{background:linear-gradient(135deg,rgba(233,69,96,0.1) 0%,var(--card) 100%);border:1px solid rgba(233,69,96,0.25);border-radius:20px;padding:28px 32px;margin-bottom:24px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;cursor:pointer;transition:all 0.2s;}
+.featured-story:hover{transform:translateY(-2px);border-color:rgba(233,69,96,0.4);}
+.fs-badge-row{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
+.fs-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;}
+.badge-breaking{background:var(--red);color:white;animation:pulse-badge 1.5s infinite;}
+.badge-verified{background:rgba(39,174,96,0.15);color:var(--green);border:1px solid rgba(39,174,96,0.3);}
+.badge-district{background:rgba(108,99,255,0.15);color:var(--purple);border:1px solid rgba(108,99,255,0.3);}
+.fs-headline{font-size:clamp(18px,3vw,24px);font-weight:800;color:white;letter-spacing:-0.3px;line-height:1.25;margin-bottom:10px;}
+.fs-telugu{font-family:var(--telugu);font-size:14px;color:var(--saffron);margin-bottom:10px;}
+.fs-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--sub);}
+.fs-img{width:160px;height:110px;border-radius:12px;object-fit:cover;background:linear-gradient(135deg,var(--blue),var(--card));display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0;}
+.section-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.section-hdr h2{font-size:16px;font-weight:700;color:white;}
+.section-hdr a{font-size:12px;color:var(--red);text-decoration:none;font-weight:600;}
+.dist-news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:32px;}
+.news-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:all 0.25s;display:flex;flex-direction:column;}
+.news-card:hover{border-color:rgba(255,255,255,0.15);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.3);}
+.nc-img{height:140px;background:linear-gradient(135deg,var(--blue) 0%,var(--surface) 100%);display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;flex-shrink:0;}
+.nc-img-label{position:absolute;bottom:8px;left:8px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(0,0,0,0.7);color:white;}
+.nc-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;}
+.nc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.nc-district{font-size:10px;font-weight:700;color:var(--purple);display:flex;align-items:center;gap:4px;}
+.nc-time{font-size:10px;color:var(--sub);font-family:var(--mono);}
+.nc-headline{font-size:14px;font-weight:700;color:white;line-height:1.35;margin-bottom:6px;flex:1;}
+.nc-telugu{font-family:var(--telugu);font-size:12px;color:var(--saffron);margin-bottom:8px;}
+.nc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
+.nc-reporter{font-size:11px;color:var(--sub);}
+.nc-stats{display:flex;gap:10px;font-size:10px;color:var(--sub);}
+.nc-badge-row{display:flex;gap:5px;margin-bottom:8px;}
+.nc-cat{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;}
+.cat-local{background:rgba(0,180,216,0.15);color:var(--teal);}
+.cat-politics{background:rgba(108,99,255,0.15);color:var(--purple);}
+.cat-crime{background:rgba(233,69,96,0.15);color:var(--red);}
+.cat-agri{background:rgba(39,174,96,0.15);color:var(--green);}
+.sidebar{display:flex;flex-direction:column;gap:16px;}
+.side-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;}
+.side-title{font-size:13px;font-weight:700;color:white;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.dsl-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border2);}
+.dsl-dot{width:8px;height:8px;border-radius:50%;}
+.dot-live{background:var(--green);}
+.dot-ai{background:var(--orange);}
+.trend-item{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border2);cursor:pointer;}
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border2);}
+.pr-val{font-family:var(--mono);font-size:12px;font-weight:700;color:white;}
+.chg-up{color:var(--green);}
+.chg-dn{color:var(--red);}
+footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;position:relative;z-index:1;}
+footer p{font-size:12px;color:var(--sub);}
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.lang-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--sub);padding:5px 12px;border-radius:7px;font-size:11px;cursor:pointer;}
+.search-bar{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 16px;display:flex;align-items:center;gap:8px;width:220px;}
+.search-bar input{background:none;border:none;color:var(--text);font-size:12px;outline:none;width:100%;}
 </style>
 </head>
-
 <body>
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">m</div>
+    <div>
+      <div class="nav-name">MaaOoru</div>
+      <span class="nav-sub">maooru.in</span>
+    </div>
+  </a>
+  <div class="nav-tabs">
+    <a class="nav-tab" href="#">Home</a>
+    <button class="nav-tab active">Telangana</button>
+  </div>
+  <div class="nav-right">
+    <div class="search-bar">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search news..." id="searchInput" oninput="applyFilters()"/>
+    </div>
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">Telugu</button>
+    <a class="nav-wa" href="#">Join</a>
+  </div>
+</nav>
 
-<h1>MaaOoru Telangana News</h1>
+<div class="ticker-bar">
+  <div class="ticker-inner" id="ticker">
+    <span class="ticker-item"><span class="tick-dist">NIZAMABAD</span><span class="tick-head">New flyover construction begins on NH-44</span><span class="tick-badge tb-verified">Verified</span></span>
+    <span class="ticker-item"><span class="tick-dist">WARANGAL</span><span class="tick-head">Fort restoration work to begin next month</span><span class="tick-badge tb-verified">Verified</span></span>
+  </div>
+</div>
 
-<input type="text" id="search" placeholder="Search..." oninput="render()" style="padding:10px;width:100%;margin-bottom:20px;border-radius:8px;border:none;">
+<div class="hero-strip">
+  <div class="hs-label">Telangana State News Feed</div>
+  <h1 class="hs-title" data-en="Telangana Today -- All 33 Districts" data-te="తెలంగాణ నేడు -- అన్ని 33 జిల్లాలు">Telangana Today -- All 33 Districts</h1>
+  <div class="hs-telugu">తెలంగాణ అన్ని జిల్లాల వార్తలు</div>
+  <div class="hs-meta">
+    <div class="live-pill"><span class="live-dot"></span>LIVE</div>
+    <span class="hs-stat"><b id="verifiedCount">0</b> Verified</span>
+    <span class="hs-stat"><b id="aiCount">0</b> AI Briefs</span>
+    <span class="last-upd" id="lastUpdate">Updated: --:--</span>
+  </div>
+</div>
 
-<div class="grid" id="news"></div>
+<div class="filter-bar">
+  <div class="filter-chips">
+    <button class="chip active" onclick="filterCat('all',this)">All Districts</button>
+    <button class="chip" onclick="filterCat('live',this)">Live</button>
+    <button class="chip" onclick="filterCat('agri',this)">Agriculture</button>
+    <button class="chip" onclick="filterCat('crime',this)">Crime</button>
+  </div>
+  <select class="sort-select" onchange="sortCards(this.value)">
+    <option value="latest">Latest First</option>
+    <option value="trending">Trending</option>
+    <option value="district">A-Z Districts</option>
+  </select>
+</div>
 
+<div class="main">
+  <div>
+    <div class="featured-story fade-up" id="featuredStory">
+      <div>
+        <div class="fs-badge-row">
+          <span class="fs-badge badge-breaking">BREAKING</span>
+          <span class="fs-badge badge-verified">Verified</span>
+          <span class="fs-badge badge-district">Nizamabad</span>
+        </div>
+        <div class="fs-headline" data-en="Nizamabad gets Rs.450 crore infrastructure package" data-te="నిజామాబాద్ కు రూ.450 కోట్ల ప్యాకేజీ">Nizamabad gets Rs.450 crore infrastructure package</div>
+        <div class="fs-meta"><span>2 hours ago</span> • <span>14k views</span></div>
+      </div>
+      <div class="fs-img">🏛️</div>
+    </div>
+
+    <div class="section-hdr">
+      <h2 data-en="Top Story from Every District" data-te="ప్రతి జిల్లా నుండి అగ్ర వార్త">Top Stories</h2>
+    </div>
+    <div class="dist-news-grid" id="newsGrid"></div>
+  </div>
+
+  <div class="sidebar">
+    <div class="side-card">
+      <div class="side-title">Live Prices</div>
+      <div class="price-row"><span>Gold 24K</span><span class="pr-val" id="sb-gold">...</span></div>
+      <div class="price-row"><span>USD/INR</span><span class="pr-val" id="sb-usd">...</span></div>
+    </div>
+    <div class="side-card">
+      <div class="side-title">Trending</div>
+      <div class="trend-item"><span class="trend-text">Infrastructure Budget 2025</span></div>
+      <div class="trend-item"><span class="trend-text">Turmeric Price Rise</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>MaaOoru | Telangana's Community Platform</p>
+</footer>
 <script>
-
 const districtNews = [
-
-{district:'Nizamabad',headline:'Turmeric prices at APMC surged',views:'8400'},
-{district:'Adilabad',headline:'Cotton farmers protest for MSP',views:'3200'},
-{district:'Bhadradri',headline:'Forest plantation drive started',views:'2100'},
-{district:'Hanumakonda',headline:'Smart city roads expansion',views:'4500'},
-{district:'Hyderabad',headline:'Electric buses launched',views:'18600'},
-{district:'Jagtial',headline:'Paddy procurement begins',views:'5300'},
-{district:'Jangaon',headline:'New CT scan machine installed',views:'6700'},
-{district:'Jayashankar',headline:'Scholarships released',views:'7200'},
-{district:'Gadwal',headline:'Irrigation canal opened',views:'4100'},
-{district:'Kamareddy',headline:'Rabi targets announced',views:'5800'},
-{district:'Karimnagar',headline:'Medical college approved',views:'12400'},
-{district:'Khammam',headline:'Chilli prices increased',views:'9300'},
-{district:'Asifabad',headline:'Bridge construction ongoing',views:'3400'},
-{district:'Mahabubabad',headline:'Voter registrations high',views:'2800'},
-{district:'Mahabubnagar',headline:'Water release benefits farmers',views:'7600'},
-{district:'Mancherial',headline:'Coal production record achieved',views:'4900'},
-{district:'Medak',headline:'Vaccination completed',views:'5100'},
-{district:'Medchal',headline:'ORR expansion planned',views:'11200'},
-{district:'Mulugu',headline:'Jatara preparations begin',views:'24600'},
-{district:'Nagarkurnool',headline:'Dam water level rises',views:'8900'},
-{district:'Narayanpet',headline:'Weavers bonus announced',views:'3700'},
-{district:'Nalgonda',headline:'Fluoride-free water project',views:'9400'},
-{district:'Nirmal',headline:'Mobile health camps launched',views:'4200'},
-{district:'Peddapalli',headline:'NTPC power record',views:'6800'},
-{district:'Sircilla',headline:'Weavers demand GST relief',views:'5500'},
-{district:'Ranga Reddy',headline:'2BHK housing added',views:'13100'},
-{district:'Sangareddy',headline:'Pharma investment inflow',views:'8700'},
-{district:'Siddipet',headline:'Paddy yield increased',views:'7300'},
-{district:'Suryapet',headline:'Bus station inaugurated',views:'5200'},
-{district:'Vikarabad',headline:'Tourism increased',views:'6100'},
-{district:'Wanaparthy',headline:'Digital literacy growth',views:'3900'},
-{district:'Warangal',headline:'Fort restoration project',views:'14800'},
-{district:'Yadadri',headline:'Temple donations record',views:'22300'},
-
-// ✅ FIXED BUG HERE
-{district:'Khammam',headline:'Sand mining racket busted',views:'11500'}
-
+  {district:'Nizamabad',telugu:'నిజామాబాద్',cat:'local',badge:'verified',
+   headline:'Turmeric prices at Nizamabad APMC surge to Rs.12,400 per quintal',
+   tel_headline:'నిజామాబాద్ APMC లో పసుపు ధరలు క్వింటాల్ కు Rs.12,400 కు పెరిగాయి',
+   reporter:'Priya Sharma',time:'45 min ago',views:'8,400',emoji:'🌾',live:true},
+  {district:'Adilabad',telugu:'ఆదిలాబాద్',cat:'agri',badge:'ai',
+   headline:'Cotton farmers in Adilabad demand higher MSP',
+   tel_headline:'ఆదిలాబాద్ లో పత్తి రైతులు అధిక MSP కోసం నిరసన చేస్తున్నారు',
+   reporter:'AI Morning Brief',time:'7:00 AM',views:'3,200',emoji:'⛰️'},
+  {district:'Hyderabad',telugu:'హైదరాబాద్',cat:'local',badge:'ai',
+   headline:'TSRTC launches 50 electric buses on city routes',
+   tel_headline:'TSRTC 50 ఎలక్ట్రిక్ బస్సులు ప్రారంభిస్తుంది',
+   reporter:'AI Morning Brief',time:'7:00 AM',views:'18,600',emoji:'🕌'},
+  {district:'Karimnagar',telugu:'కరీంనగర్',cat:'local',badge:'ai',
+   headline:'Central government approves new medical college for Karimnagar',
+   tel_headline:'కరీంనగర్ కు కొత్త మెడికల్ కాలేజీ ఆమోదించబడింది',
+   reporter:'AI Morning Brief',time:'7:00 AM',views:'12,400',emoji:'💎'},
+  {district:'Khammam',telugu:'ఖమ్మం',cat:'agri',badge:'ai',
+   headline:'Red chilli prices in Khammam touch Rs.18,500',
+   tel_headline:'ఖమ్మం APMC లో ఎర్ర మిర్చి ధరలు క్వింటాల్ కు Rs.18,500 కు చేరాయి',
+   reporter:'AI Morning Brief',time:'7:00 AM',views:'9,300',emoji:'🌴'},
+  {district:'Medak',telugu:'మెదక్',cat:'health',badge:'ai',
+   headline:'Medak district completes 100% vaccination coverage',
+   tel_headline:'మెదక్ జిల్లా 100 శాతం వ్యాక్సినేషన్ పూర్తి చేసింది',
+   reporter:'AI Morning Brief',time:'7:00 AM',views:'5,100',emoji:'⛪'},
+  {district:'Khammam',telugu:'ఖమ్మం',cat:'crime',badge:'ai',
+   headline:'Khammam police crack major sand mining racket',
+   tel_headline:'ఖమ్మం పోలీసులు ఇసుక మైనింగ్ ముఠాను పట్టుకున్నారు',
+   reporter:'AI Morning Brief',time:'7:00 AM',views:'11,500',emoji:'🔍'}
 ];
+  let currentCat = 'all';
+let currentSort = 'latest';
+let isEnglish = true;
 
-function render(){
-  const container = document.getElementById('news');
-  const search = document.getElementById('search').value.toLowerCase();
-  container.innerHTML = '';
-
-  districtNews
-    .filter(item =>
-      item.district.toLowerCase().includes(search) ||
-      item.headline.toLowerCase().includes(search)
-    )
-    .forEach(item=>{
-      const div = document.createElement('div');
-      div.className = 'card';
-      div.innerHTML = `
-        <h3>${item.district}</h3>
-        <p>${item.headline}</p>
-        <small>${item.views} views</small>
-      `;
-      container.appendChild(div);
-    });
+function buildCards(data) {
+  const grid = document.getElementById('newsGrid');
+  grid.innerHTML = '';
+  data.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = `news-card fade-up ${item.badge === 'verified' ? 'live-card' : 'ai-card'}`;
+    card.style.transitionDelay = (i % 6 * 0.05) + 's';
+    card.innerHTML = `
+      <div class="nc-img">
+        <span>${item.emoji}</span>
+        ${item.live ? '<div class="nc-live"><div class="nc-live-dot"></div>LIVE</div>' : ''}
+      </div>
+      <div class="nc-body">
+        <div class="nc-top"><span class="nc-district">${item.district}</span><span class="nc-time">${item.time}</span></div>
+        <div class="nc-badge-row"><span class="nc-cat cat-${item.cat}">${item.cat.toUpperCase()}</span></div>
+        <div class="nc-headline" data-en="${item.headline}" data-te="${item.tel_headline}">${isEnglish ? item.headline : item.tel_headline}</div>
+        <div class="nc-footer"><span class="nc-reporter">${item.reporter}</span><span>${item.views} views</span></div>
+      </div>`;
+    grid.appendChild(card);
+  });
+  
+  setTimeout(() => {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+  }, 100);
+  updateCounts(data);
 }
 
-render();
+function filterCat(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
 
+function applyFilters() {
+  let data = [...districtNews];
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  
+  if (currentCat !== 'all') {
+    if (currentCat === 'live') data = data.filter(d => d.live);
+    else data = data.filter(d => d.cat === currentCat);
+  }
+  if (search) {
+    data = data.filter(d => d.headline.toLowerCase().includes(search) || d.district.toLowerCase().includes(search));
+  }
+  if (currentSort === 'district') data.sort((a, b) => a.district.localeCompare(b.district));
+  
+  buildCards(data);
+}
+
+function toggleLang() {
+  isEnglish = !isEnglish;
+  document.getElementById('langBtn').textContent = isEnglish ? 'Telugu' : 'English';
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = isEnglish ? el.getAttribute('data-en') : el.getAttribute('data-te');
+  });
+  applyFilters();
+}
+
+async function fetchPrices() {
+  try {
+    const res = await fetch('https://open.er-api.com/v6/latest/USD');
+    const data = await res.json();
+    document.getElementById('sb-usd').textContent = 'Rs.' + data.rates.INR.toFixed(2);
+    document.getElementById('sb-gold').textContent = 'Rs.72,450'; // Placeholder for demo
+  } catch(e) { console.error('Price error', e); }
+}
+
+function updateTime() {
+  document.getElementById('lastUpdate').textContent = 'Updated: ' + new Date().toLocaleTimeString('en-IN', {hour:'2-digit',minute:'2-digit'});
+}
+
+function updateCounts(data) {
+  document.getElementById('verifiedCount').textContent = data.filter(d => d.badge === 'verified').length;
+  document.getElementById('aiCount').textContent = data.filter(d => d.badge === 'ai').length;
+}
+
+// Init
+buildCards(districtNews);
+fetchPrices();
+updateTime();
 </script>
-
 </body>
 </html>
