@@ -180,6 +180,19 @@ footer p{font-size:12px;color:var(--sub);}
 .search-bar{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 16px;display:flex;align-items:center;gap:8px;width:220px;}
 .search-bar input{background:none;border:none;color:var(--text);font-size:12px;font-family:var(--font);outline:none;width:100%;}
 .search-bar input::placeholder{color:var(--sub);}
+
+  [data-theme="light"]{
+  --bg:#ffffff;
+  --surface:#f5f5f5;
+  --card:#ffffff;
+  --card2:#fafafa;
+  --border:rgba(0,0,0,0.1);
+  --border2:rgba(0,0,0,0.05);
+  --text:#111827;
+  --sub:#6b7280;
+  --white:#000;
+}
+  
 </style>
 
 </head>  
@@ -207,6 +220,7 @@ footer p{font-size:12px;color:var(--sub);}
       <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.554 4.118 1.523 5.845L.057 23.943l6.294-1.465A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.014-1.378l-.36-.213-3.732.869.885-3.631-.234-.374A9.818 9.818 0 0112 2.182c5.42 0 9.818 4.398 9.818 9.818S17.42 21.818 12 21.818z"/></svg>  
       Join  
     </a>  
+    <button class="lang-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
   </div>  
 </nav>  <!-- TICKER -->  <div class="ticker-bar">  
   <div class="ticker-inner" id="ticker">  
@@ -654,6 +668,30 @@ function updateTime() {
   document.getElementById('lastUpdate').textContent =  
     'Updated: ' + now.toLocaleTimeString('en-IN', {hour:'2-digit',minute:'2-digit',hour12:true}) + ' IST';  
 }  
+
+
+  function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme");
+
+  if (current === "light") {
+    document.documentElement.removeAttribute("data-theme");
+    localStorage.setItem("theme", "dark");
+    document.getElementById("themeBtn").textContent = "🌙";
+  } else {
+    document.documentElement.setAttribute("data-theme", "light");
+    localStorage.setItem("theme", "light");
+    document.getElementById("themeBtn").textContent = "☀️";
+  }
+}
+
+// load saved theme
+(function () {
+  const saved = localStorage.getItem("theme");
+  if (saved === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+    document.getElementById("themeBtn").textContent = "☀️";
+  }
+})();
   
 // INIT  
 buildCards(districtNews);  
