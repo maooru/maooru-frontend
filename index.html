@@ -1,1 +1,94 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Telangana News Today | MaaOoru -- All 33 Districts Live</title>
 
+<style>
+body{font-family:Arial;background:#0D0D1A;color:white;margin:0;padding:20px;}
+h1{color:#E94560;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;}
+.card{background:#1C1C2E;padding:15px;border-radius:10px;}
+</style>
+</head>
+
+<body>
+
+<h1>MaaOoru Telangana News</h1>
+
+<input type="text" id="search" placeholder="Search..." oninput="render()" style="padding:10px;width:100%;margin-bottom:20px;border-radius:8px;border:none;">
+
+<div class="grid" id="news"></div>
+
+<script>
+
+const districtNews = [
+
+{district:'Nizamabad',headline:'Turmeric prices at APMC surged',views:'8400'},
+{district:'Adilabad',headline:'Cotton farmers protest for MSP',views:'3200'},
+{district:'Bhadradri',headline:'Forest plantation drive started',views:'2100'},
+{district:'Hanumakonda',headline:'Smart city roads expansion',views:'4500'},
+{district:'Hyderabad',headline:'Electric buses launched',views:'18600'},
+{district:'Jagtial',headline:'Paddy procurement begins',views:'5300'},
+{district:'Jangaon',headline:'New CT scan machine installed',views:'6700'},
+{district:'Jayashankar',headline:'Scholarships released',views:'7200'},
+{district:'Gadwal',headline:'Irrigation canal opened',views:'4100'},
+{district:'Kamareddy',headline:'Rabi targets announced',views:'5800'},
+{district:'Karimnagar',headline:'Medical college approved',views:'12400'},
+{district:'Khammam',headline:'Chilli prices increased',views:'9300'},
+{district:'Asifabad',headline:'Bridge construction ongoing',views:'3400'},
+{district:'Mahabubabad',headline:'Voter registrations high',views:'2800'},
+{district:'Mahabubnagar',headline:'Water release benefits farmers',views:'7600'},
+{district:'Mancherial',headline:'Coal production record achieved',views:'4900'},
+{district:'Medak',headline:'Vaccination completed',views:'5100'},
+{district:'Medchal',headline:'ORR expansion planned',views:'11200'},
+{district:'Mulugu',headline:'Jatara preparations begin',views:'24600'},
+{district:'Nagarkurnool',headline:'Dam water level rises',views:'8900'},
+{district:'Narayanpet',headline:'Weavers bonus announced',views:'3700'},
+{district:'Nalgonda',headline:'Fluoride-free water project',views:'9400'},
+{district:'Nirmal',headline:'Mobile health camps launched',views:'4200'},
+{district:'Peddapalli',headline:'NTPC power record',views:'6800'},
+{district:'Sircilla',headline:'Weavers demand GST relief',views:'5500'},
+{district:'Ranga Reddy',headline:'2BHK housing added',views:'13100'},
+{district:'Sangareddy',headline:'Pharma investment inflow',views:'8700'},
+{district:'Siddipet',headline:'Paddy yield increased',views:'7300'},
+{district:'Suryapet',headline:'Bus station inaugurated',views:'5200'},
+{district:'Vikarabad',headline:'Tourism increased',views:'6100'},
+{district:'Wanaparthy',headline:'Digital literacy growth',views:'3900'},
+{district:'Warangal',headline:'Fort restoration project',views:'14800'},
+{district:'Yadadri',headline:'Temple donations record',views:'22300'},
+
+// ✅ FIXED BUG HERE
+{district:'Khammam',headline:'Sand mining racket busted',views:'11500'}
+
+];
+
+function render(){
+  const container = document.getElementById('news');
+  const search = document.getElementById('search').value.toLowerCase();
+  container.innerHTML = '';
+
+  districtNews
+    .filter(item =>
+      item.district.toLowerCase().includes(search) ||
+      item.headline.toLowerCase().includes(search)
+    )
+    .forEach(item=>{
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `
+        <h3>${item.district}</h3>
+        <p>${item.headline}</p>
+        <small>${item.views} views</small>
+      `;
+      container.appendChild(div);
+    });
+}
+
+render();
+
+</script>
+
+</body>
+</html>
